@@ -7,6 +7,7 @@ import './MainMenu.css';
 const MainMenu = () => {
   return (
     <>
+
     <div className="nes-container is-dark  vh">
       <div className="main-menu text-center is-dark">
         <h2 className="m-4">Bienvenido a mi CV</h2>

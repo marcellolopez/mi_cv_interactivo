@@ -56,17 +56,17 @@ const Experiencia = () => {
       <div className="nes-container is-dark with-title">
         <h2 className="title">Experiencia</h2>
         {experiencias.map((experiencia, index) => (
-          <div key={index}>
+          <div className='contenido' key={index}>
             <h5>{experiencia.puesto}</h5>
             <p>{experiencia.fecha}</p>
             <p className='text-decoration-underline'>{experiencia.empresa}</p>
             <ul className='nes-list is-circle'>
               {experiencia.proyectos.map((proyecto, proyectoIndex) => (
-                <li className='mb-2' key={proyectoIndex}>{proyecto}</li>
+                <li className='mb-3' key={proyectoIndex}>{proyecto}</li>
               ))}
             </ul>
-            <p>Tecnologías: {experiencia.tecnologias.join(', ')}</p>
-            <div class="mt-4 mb-4 border-top"></div>
+            <p className='two-line-paragraph'>Tecnologías: {experiencia.tecnologias.join(', ')}</p>
+            <div class="mt-5 mb-5 border-top"></div>
 
           </div>
         ))}
