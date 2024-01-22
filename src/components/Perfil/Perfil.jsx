@@ -28,7 +28,7 @@ const Perfil = () => {
 
       </div>
       <div className="volver-link">
-          <Link to="/" className="nes-btn">Volver</Link>
+          <Link to="/MainMenu" className="nes-btn">Volver</Link>
       </div>
     </div>
     </>
