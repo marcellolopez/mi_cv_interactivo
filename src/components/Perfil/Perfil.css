@@ -1,0 +1,32 @@
+
+
+/* Estilos para pantallas pequeñas (teléfonos móviles) */
+@media only screen and (max-width: 600px) {
+
+  }
+  
+  /* Estilos para pantallas medianas (tabletas) */
+  @media only screen and (min-width: 601px) and (max-width: 992px) {
+    /* Agrega tus estilos aquí */
+  }
+  
+  /* Estilos para pantallas grandes (monitores de escritorio) */
+  @media only screen and (min-width: 993px) {
+    .perfil-container {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+      }
+  }
+  
+  /* Estilos para pantallas muy pequeñas (por ejemplo, relojes inteligentes) */
+  @media only screen and (max-width: 320px) {
+    /* Agrega tus estilos aquí */
+  }
+  
+  /* Estilos para pantallas de alta resolución (retina, etc.) */
+  @media only screen and (min-resolution: 2dppx) {
+    /* Agrega tus estilos aquí */
+  }
