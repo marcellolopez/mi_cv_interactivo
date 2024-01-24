@@ -18,7 +18,7 @@ const MainMenu = () => {
   // Precarga los archivos de sonido cuando el componente se monta
   useEffect(() => {
     soundFiles.forEach((audioFile) => {
-      const audioElement = new Audio('/src/assets/fx/' + {audioFile});
+      const audioElement = new Audio('/assets/fx/' + {audioFile});
       audioElement.preload = 'auto';      
       audioElement.volume = 0.0;
       audioElement.play()
