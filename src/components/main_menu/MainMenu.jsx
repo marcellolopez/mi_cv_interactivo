@@ -18,6 +18,7 @@ const MainMenu = () => {
   // Precarga los archivos de sonido cuando el componente se monta
   useEffect(() => {
     soundFiles.forEach((audioFile) => {
+      console.log(audioFile);
       const audioElement = new Audio('/assets/fx/' + {audioFile});
       audioElement.preload = 'auto';      
       audioElement.volume = 0.0;
@@ -26,7 +27,7 @@ const MainMenu = () => {
   }, []); 
 
   const { allowSounds, playSound } = useSound();
-
+  console.log(allowSounds)
   const HandlePickUpCoin = () => {
     if (allowSounds) {
       playSound(pickUpCoin, 0.5);
