@@ -29,7 +29,7 @@ const Sounds = ({ children }) => {
   const stopMusic = useCallback(() => {
     // Puedes agregar lógica para detener la música si es necesario
   }, []);
-
+  /*/
   // Lista de archivos de sonido que quieres precargar
   const soundFiles = ['/src/assets/fx/pickUpCoin.wav', '/src/assets/fx/bg-music.mp3', '/src/assets/fx/progress.mp3', '/src/assets/fx/enter.mp3'];
 
@@ -40,6 +40,7 @@ const Sounds = ({ children }) => {
       audioElement.preload = 'auto';
     });
   }, []);
+  /*/
 
   const value = {
     allowSounds,
