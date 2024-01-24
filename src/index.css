@@ -90,6 +90,15 @@ body {
       max-height: 3.2em; /* Altura máxima de dos líneas (2 * line-height) */
       overflow: hidden; /* Oculta el contenido adicional si excede la altura máxima */
     }    
+
+    body {
+
+        background-size: auto;
+    }   
+
+  .volver-link {
+    opacity: 100%;
+  }     
   }
   
   /* Estilos para pantallas medianas (tabletas) */
