@@ -8,7 +8,7 @@
     "framework": "react",
     "headers": [
       {
-        "source": "/path-to-your-audio-files/*",
+        "source": "/src/assets/fx/*",
         "headers": [
           {
             "key": "Link",
