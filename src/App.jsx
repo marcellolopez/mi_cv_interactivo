@@ -24,6 +24,7 @@ const App = () => {
     soundFiles.forEach((audioFile) => {
       const audioElement = new Audio(audioFile);
       audioElement.preload = 'metadata';
+      console.log('Metadata')
     });
   }, []);  
   
