@@ -1,10 +1,26 @@
 {
     "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/"
-        }
+      {
+        "source": "/(.*)",
+        "destination": "/"
+      }
     ],
-    "framework": "react"
-    
-}
+    "framework": "react",
+    "headers": [
+      {
+        "source": "/path-to-your-audio-files/*",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</src/assets/fx/progress.mp3>; rel=preload; as=audio",
+            "type": "string"
+          },
+          {
+            "key": "Link",
+            "value": "</src/assets/fx/pickUpCoin.wav>; rel=preload; as=audio",
+            "type": "string"
+          }
+        ]
+      }
+    ]
+  }
