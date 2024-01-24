@@ -15,18 +15,7 @@ import Sounds from './components/Sounds/Sounds';
 
 const App = () => {
 
-  // Lista de archivos de sonido que quieres precargar
-  const soundFiles = ['/src/assets/fx/pickUpCoin.wav', '/src/assets/fx/bg-music.mp3', '/src/assets/fx/progress.mp3', '/src/assets/fx/enter.mp3'];
-
-
-  // Precarga los archivos de sonido cuando el componente se monta
-  useEffect(() => {
-    soundFiles.forEach((audioFile) => {
-      const audioElement = new Audio(audioFile);
-      audioElement.preload = 'metadata';
-      console.log('Metadata')
-    });
-  }, []);  
+ 
   
   return (
     <div className="app-container style={{ overflow: 'hidden', overflowY: 'hidden' }}">

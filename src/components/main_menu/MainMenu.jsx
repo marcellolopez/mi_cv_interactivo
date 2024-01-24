@@ -10,6 +10,21 @@ import pong from '/src/assets/fx/pong.mp3';
 import pluck from '/src/assets/fx/pluck.mp3';
 
 const MainMenu = () => {
+
+  // Lista de archivos de sonido que quieres precargar
+  const soundFiles = ['pickUpCoin.wav', 'progress.mp3', 'enter.mp3', 'hit-8bit.mp3', 'pong.mp3', 'back.mp3'];
+
+
+  // Precarga los archivos de sonido cuando el componente se monta
+  useEffect(() => {
+    soundFiles.forEach((audioFile) => {
+      const audioElement = new Audio('/src/assets/fx/' + {audioFile});
+      audioElement.preload = 'auto';      
+      audioElement.volume = 0.0;
+      audioElement.play()
+    });
+  }, []); 
+
   const { allowSounds, playSound } = useSound();
 
   const HandlePickUpCoin = () => {
