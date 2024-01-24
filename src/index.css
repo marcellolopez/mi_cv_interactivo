@@ -119,12 +119,15 @@ body {
   
   /* Estilos para pantallas grandes (monitores de escritorio) */
   @media only screen and (min-width: 993px) {
-    /* Agrega tus estilos aquí */
+
   }
   
   /* Estilos para pantallas muy pequeñas (por ejemplo, relojes inteligentes) */
-  @media only screen and (max-width: 320px) {
-    /* Agrega tus estilos aquí */
+  @media only screen and (max-width: 360px) {
+    .container-main-menu{
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
   }
   
   /* Estilos para pantallas de alta resolución (retina, etc.) */

@@ -53,9 +53,9 @@ const MainMenu = () => {
   }
   return (
     <>
-      <div className="nes-container is-dark vh">
+      <div className="nes-container container-main-menu is-dark vh">
         <div className="main-menu text-center is-dark">
-          <h3 className="m-4">Bienvenido a mi CV</h3>
+          <h3 className="mb-5 mt-2">Bienvenido a mi CV</h3>
 
           <div className="d-flex justify-content-center">
             <ul className="nes-list ul-margin">
@@ -77,7 +77,7 @@ const MainMenu = () => {
             </ul>
           </div>
 
-          <div className='d-none d-sm-block col-4 offset-4 mt-5'>
+          <div className='d-none d-sm-block col-4 offset-4 mt-4'>
             <div className="d-flex justify-content-around align-items-end">
               <a href="mailto:mlc74163322@gmail.com" target="_blank" rel="noopener noreferrer">
                 <i className="nes-icon gmail is-medium"></i>
