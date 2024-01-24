@@ -1,5 +1,6 @@
 // src/components/main_menu/MainMenu.jsx
 import React, { useEffect, useRef } from 'react';
+import Sounds, { useSound } from '../Sounds/Sounds';
 import { Link } from 'react-router-dom';
 import 'nes.css/css/nes.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,7 +8,6 @@ import pickUpCoin from '/src/assets/fx/pickUpCoin.wav';
 import hit from '/src/assets/fx/hit-8bit.mp3';
 import pong from '/src/assets/fx/pong.mp3';
 import pluck from '/src/assets/fx/pluck.mp3';
-import Sounds, { useSound } from '../Sounds/Sounds';
 
 const MainMenu = () => {
   const { allowSounds, playSound } = useSound();

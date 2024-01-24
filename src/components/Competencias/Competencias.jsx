@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
+import { useSound } from '../Sounds/Sounds';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
-import { useSound } from '../Sounds/Sounds';
 import progress from '/src/assets/fx/progress.mp3';
 import back from '/src/assets/fx/back.mp3';
 import 'bootstrap/dist/css/bootstrap.min.css';
