@@ -23,9 +23,10 @@ const App = () => {
   useEffect(() => {
     soundFiles.forEach((audioFile) => {
       const audioElement = new Audio(audioFile);
-      audioElement.preload = 'auto';
+      audioElement.preload = 'metadata';
     });
   }, []);  
+  
   return (
     <div className="app-container style={{ overflow: 'hidden', overflowY: 'hidden' }}">
       <BrowserRouter>
