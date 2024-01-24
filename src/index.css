@@ -71,7 +71,7 @@ body {
 /* Estilos para pantallas pequeñas (teléfonos móviles) */
 @media only screen and (max-width: 600px) {
     .vh{
-        height: 60vh; /* 100% de la altura del viewport */
+        height: 70vh; /* 100% de la altura del viewport */
         width: 45vh;    
     }
     .volver-link{
@@ -80,7 +80,17 @@ body {
     .nes-container.is-dark {
         margin: -10px;
     }    
+    p{
+      font-size: 13px;
+    }
 
+    li{
+      font-size: 15px;
+    }
+
+    ol, ul {
+        padding-left: 1rem;
+    }
     .contenido{
       margin: -15px;
     }
@@ -88,7 +98,7 @@ body {
     .two-line-paragraph {
       font-size: 14px; /* Tamaño del texto */
       line-height: 1.1; /* Espaciado entre líneas */
-      max-height: 3.2em; /* Altura máxima de dos líneas (2 * line-height) */
+      max-height: 5.2em; /* Altura máxima de dos líneas (2 * line-height) */
       overflow: hidden; /* Oculta el contenido adicional si excede la altura máxima */
     }    
 

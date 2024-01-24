@@ -55,7 +55,7 @@ const MainMenu = () => {
     <>
       <div className="nes-container is-dark vh">
         <div className="main-menu text-center is-dark">
-          <h2 className="m-4">Bienvenido a mi CV</h2>
+          <h3 className="m-4">Bienvenido a mi CV</h3>
 
           <div className="d-flex justify-content-center">
             <ul className="nes-list ul-margin">
@@ -71,6 +71,9 @@ const MainMenu = () => {
               <li className="mb-4">
                 <Link className='nes-btn is-error w-100' to="/estudios" onClick={HandlePluck}>Estudios</Link>
               </li>
+              <li className="mb-4">
+                <Link className='nes-btn w-100' to="/" onClick={HandlePickUpCoin}>Opciones</Link>
+              </li>              
             </ul>
           </div>
 

@@ -21,7 +21,7 @@ const Experiencia = () => {
         'Proyecto de 6 meses, desarrollos de incidencias',
         'Desarrollo del 60% de las mejoras para sistema interno de honorarios médicos',
       ],
-      tecnologias: ['Laravel', 'CSS', 'Bootstrap', 'PostgreSQL'],
+      tecnologias: ['Laravel', 'PostgreSQL', 'CSS', 'Bootstrap'],
     },
     {
       puesto: 'Desarrollador Laravel',
@@ -32,7 +32,7 @@ const Experiencia = () => {
         'Integraciones como botones de pago, Power BI, RPA, etc',
         'Lider del equipo de innovación (Alexa Skills, Arduino)',
       ],
-      tecnologias: ['PHP', 'Laravel'],
+      tecnologias: ['PHP', 'Laravel', 'Selenium', 'Robot Framework'],
     },
     {
       puesto: 'Analista Programador',
@@ -56,7 +56,7 @@ const Experiencia = () => {
       fecha: 'ene 2015 - dic 2015',
       empresa: 'Aguas décima S.A., Valdivia',
       proyectos: ['Desarrollador de plataforma web para pagos online', 'Reducción de filas en un 30%'],
-      tecnologias: ['PHP', 'MySQL', 'JavaScript', 'API Servipag'],
+      tecnologias: ['PHP', 'API Servipag', 'MySQL', 'JavaScript', 'C#'],
     },
   ];
 
@@ -75,7 +75,7 @@ const Experiencia = () => {
                 <li className='mb-3' key={proyectoIndex}>{proyecto}</li>
               ))}
             </ul>
-            <p className='two-line-paragraph'>Tecnologías: {experiencia.tecnologias.join(', ')}</p>
+            <p className='two-line-paragraph'> <label> Tecnologías: </label> <br /> {experiencia.tecnologias.join(', ')}</p>
             <div className="mt-5 mb-5 border-top"></div>
 
           </div>
