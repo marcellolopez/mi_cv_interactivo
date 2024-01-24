@@ -29,7 +29,7 @@ const Inicio = () => {
     if (value === 'true' && isChecked) {
       stopMusic();
       // Reproduce el sonido al marcar el checkbox
-      playBackgroundMusic(bgMusic, 0.4);
+      playBackgroundMusic(bgMusic, 0.2);
       console.log('Play', value);
     } else {
       // Detiene la música al desmarcar el checkbox
