@@ -5,22 +5,5 @@
         "destination": "/"
       }
     ],
-    "framework": "react",
-    "headers": [
-      {
-        "source": "/src/assets/fx/*",
-        "headers": [
-          {
-            "key": "Link",
-            "value": "</src/assets/fx/progress.mp3>; rel=preload; as=audio",
-            "type": "string"
-          },
-          {
-            "key": "Link",
-            "value": "</src/assets/fx/pickUpCoin.wav>; rel=preload; as=audio",
-            "type": "string"
-          }
-        ]
-      }
-    ]
+    "framework": "react"
   }
