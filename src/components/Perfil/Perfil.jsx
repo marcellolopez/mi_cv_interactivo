@@ -1,8 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Perfil.css';
+import { useSound } from '../Sounds/Sounds';
+import back from '/src/assets/fx/back.mp3';
 
 const Perfil = () => {
+
+  const { allowSounds, playSound } = useSound();
+
+  const HandleBack = () => {
+    if (allowSounds) {
+      playSound(back, 0.5);
+    }
+  }
+    
   return (
     <>
     <div className="nes-container is-dark  vh overflow-y-auto overflow-x-hidden ">
@@ -28,8 +39,8 @@ const Perfil = () => {
 
       </div>
       <div className="volver-link">
-          <Link to="/MainMenu" className="nes-btn">Volver</Link>
-      </div>
+        <Link to="/MainMenu" className="nes-btn" onClick={HandleBack}>Volver</Link>
+      </div>  
     </div>
     </>
   

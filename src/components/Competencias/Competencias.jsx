@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
+import { useSound } from '../Sounds/Sounds';
+import progress from '/src/assets/fx/progress.mp3';
+import back from '/src/assets/fx/back.mp3';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const habilidades = [
   { titulo: 'PHP', value: 85, 'class': 'is-primary' }, 
@@ -18,14 +22,28 @@ const habilidades = [
 ];
 
 const Competencias = () => {
+  const { playSound, allowSounds, stopMusic } = useSound();
+
+  const HandleBack = () => {
+    if (allowSounds) {
+      playSound(back, 0.5);
+    }
+  }
+
   useEffect(() => {
+    // Reproduce el sonido al iniciar la vista
+    playSound(progress, 0.2);
+
     function animateProgressBar(barSelector, finalValue) {
       $(barSelector).animate({
         value: finalValue
       }, {
-        duration: 2000,
+        duration: 1500,
         step: function(now) {
           $(barSelector).attr('value', now);
+          
+          // Quita a la clase volver-link la clase d-none
+          $('.volver-link').removeClass('d-none');
         }
       });
     }
@@ -34,12 +52,8 @@ const Competencias = () => {
     // Recorre la constante habilidades y usa el animateProgressBar para animar la clase bar{index}
     habilidades.forEach((habilidad, index) => {
       animateProgressBar(`.nes-progress.bar${index}`, habilidad.value);
-    })
-  }, []);
-
-
-
-
+    });
+  }, [playSound]);
 
   return (
     <>
@@ -54,8 +68,8 @@ const Competencias = () => {
         ))}
       </div>
       <div className="volver-link">
-        <Link to="/MainMenu" className="nes-btn">Volver</Link>
-      </div>
+        <Link to="/MainMenu" className="nes-btn" onClick={HandleBack}>Volver</Link>
+      </div>      
       </div>
     </>
   );

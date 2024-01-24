@@ -1,7 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSound } from '../Sounds/Sounds';
+import back from '/src/assets/fx/back.mp3';
 
 const Experiencia = () => {
+  const { allowSounds, playSound, stopMusic } = useSound();
+
+  const HandleBack = () => {
+    if (allowSounds) {
+      playSound(back, 0.5);
+    }
+  }
+
   const experiencias = [
     {
       puesto: 'Desarrollador Senior',
@@ -66,14 +76,14 @@ const Experiencia = () => {
               ))}
             </ul>
             <p className='two-line-paragraph'>Tecnologías: {experiencia.tecnologias.join(', ')}</p>
-            <div class="mt-5 mb-5 border-top"></div>
+            <div className="mt-5 mb-5 border-top"></div>
 
           </div>
         ))}
       </div>
       <div className="volver-link">
-        <Link to="/MainMenu" className="nes-btn">Volver</Link>
-      </div>
+        <Link to="/MainMenu" className="nes-btn" onClick={HandleBack}>Volver</Link>
+      </div>  
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ import Sounds from './components/Sounds/Sounds';
 
 const App = () => {
   return (
-    <div className="app-container">
+    <div className="app-container style={{ overflow: 'hidden', overflowY: 'hidden' }}">
       <BrowserRouter>
         <Sounds>
           <Routes>

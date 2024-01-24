@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Sounds, { useSound } from '../Sounds/Sounds';
+import back from '/src/assets/fx/back.mp3';
 
 const Estudios = () => {
+  const { allowSounds, playSound } = useSound();
+  
   const estudios = [
     {
       tipo: 'FORMACIÓN',
@@ -47,6 +51,12 @@ const Estudios = () => {
     },
   ];
 
+  const HandleBack = () => {
+    if (allowSounds) {
+      playSound(back, 0.5);
+    }
+  }
+
   return (
     <div>
     <div className="nes-container is-dark  vh overflow-y-auto overflow-x-hidden ">
@@ -63,8 +73,8 @@ const Estudios = () => {
         ))}
       </div>
       <div className="volver-link">
-        <Link to="/MainMenu" className="nes-btn">Volver</Link>
-      </div>
+        <Link to="/MainMenu" className="nes-btn" onClick={HandleBack}>Volver</Link>
+      </div>  
     </div>
     </div>
   );
