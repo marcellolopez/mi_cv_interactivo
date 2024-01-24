@@ -42,6 +42,7 @@ const Sounds = ({ children }) => {
   }, []);
   /*/
 
+  
   const value = {
     allowSounds,
     toggleSounds,
