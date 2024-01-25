@@ -123,10 +123,44 @@ body {
   }
   
   /* Estilos para pantallas muy pequeñas (por ejemplo, relojes inteligentes) */
-  @media only screen and (max-width: 360px) {
-    .container-main-menu{
+  @media only screen and (max-width: 375px) {
+    .nes-container{
       overflow-y: auto;
       overflow-x: hidden;
+    }
+    .nes-container {
+      overflow: scroll; /* Permite el desplazamiento */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
+      scrollbar-width: none; /* Firefox */
+    }
+    
+    .nes-container::-webkit-scrollbar {
+      display: none; /* WebKit (Chrome, Safari) */
+    }    
+    .vh{
+        height: 80vh; /* 100% de la altura del viewport */
+        width: 45vh;    
+    }  
+
+    .nes-container.is-dark {
+        margin: -10px;
+    }    
+    p{
+      font-size: 13px;
+    }
+
+    li{
+      font-size: 12px;
+    }
+
+    ol, ul {
+        padding-left: 0.7rem;
+    }    
+
+    .title{
+      margin-top: 0.5rem !important;
+      margin-bottom: 2rem !important;
+      text-align: center !important;
     }
   }
   
@@ -138,5 +172,12 @@ body {
 @media (min-width: 768px){
   .offset-md-3 {
       margin-left: 22%;
+  }
+}
+
+@media (max-width: 412px){
+
+  .vh{
+    width: 40vh;  
   }
 }
