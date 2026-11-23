@@ -3,6 +3,7 @@ import React from 'react';
 import 'nes.css/css/nes.min.css';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Sounds from './components/Sounds/Sounds';
+import Background from './components/Background/Background';
 import { ProgressProvider } from './components/Progress/Progress';
 import Inicio from './components/Inicio/Inicio';
 import MainMenu from './components/main_menu/MainMenu';
@@ -35,6 +36,7 @@ const App = () => (
   <BrowserRouter>
     <Sounds>
       <ProgressProvider>
+        <Background />
         <AnimatedRoutes />
       </ProgressProvider>
     </Sounds>

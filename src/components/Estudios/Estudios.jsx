@@ -8,8 +8,8 @@ const Logro = ({ item, icon, index, featured = false }) => (
     <i className={`nes-icon ${icon} ${featured ? 'is-medium' : 'is-small'}`} aria-hidden="true"></i>
     <div>
       <h3 className="achievement-title">{item.titulo}</h3>
-      <p className="achievement-meta">{item.institucion}</p>
-      <p className="achievement-date">{item.fecha}</p>
+      {item.institucion && <p className="achievement-meta">{item.institucion}</p>}
+      {item.fecha && <p className="achievement-date">{item.fecha}</p>}
     </div>
   </li>
 );

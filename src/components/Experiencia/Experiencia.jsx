@@ -8,7 +8,7 @@ const Experiencia = () => {
 
   return (
     <Screen title="Experiencia">
-      <p className="screen-intro">Misiones completadas, de la más reciente a la más antigua.</p>
+      <p className="screen-intro">Mis misiones, de la más reciente a la más antigua.</p>
       <ol className="quests">
         {experiencias.map((exp, index) => (
           <li key={`${exp.empresa}-${exp.fecha}`} className="quest" style={{ '--i': index }}>
@@ -16,7 +16,10 @@ const Experiencia = () => {
               <p className="title">Misión {experiencias.length - index}</p>
               <h2 className="quest-role">{exp.puesto}</h2>
               <p className="quest-company">{exp.empresa}</p>
-              <p className="quest-date">{exp.fecha}</p>
+              <p className="quest-date">
+                {exp.fecha}
+                {exp.actual && <span className="quest-live">En curso</span>}
+              </p>
               <ul className="nes-list is-circle quest-list">
                 {exp.proyectos.map((proyecto) => (
                   <li key={proyecto}>{proyecto}</li>

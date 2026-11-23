@@ -2,15 +2,11 @@ import React, { useEffect } from 'react';
 import { useSound } from '../Sounds/Sounds';
 import Screen from '../Screen/Screen';
 import { useVisit } from '../Progress/Progress';
-import { useAnimationProgress } from '../../hooks/animation';
-import { habilidades } from '../../data/cv';
-
-const easeOut = (t) => 1 - (1 - t) ** 3;
+import { competencias, fortalezas } from '../../data/cv';
 
 const Competencias = () => {
   useVisit('habilidades');
   const { playSound } = useSound();
-  const progress = useAnimationProgress(1800);
 
   useEffect(() => {
     playSound('progress', 0.2);
@@ -18,31 +14,41 @@ const Competencias = () => {
 
   return (
     <Screen title="Habilidades">
-      <p className="screen-intro">Nivel de dominio de cada tecnología (LV 1 a 10).</p>
-      <ul className="skills">
-        {habilidades.map((skill, index) => {
-          // Cada barra arranca un poco después de la anterior.
-          const local = Math.min(1, Math.max(0, progress * 1.6 - index * 0.05));
-          const value = Math.round(skill.value * easeOut(local));
-          return (
-            <li key={skill.titulo} className="skill" style={{ '--i': index }}>
-              <div className="skill-head">
-                <span id={`skill-${index}`}>{skill.titulo}</span>
-                <span className="skill-level" aria-hidden="true">
-                  LV {Math.max(1, Math.round(value / 10))}
-                </span>
-              </div>
-              <progress
-                className={`nes-progress ${skill.color}`}
-                value={value}
-                max="100"
-                aria-labelledby={`skill-${index}`}
-                aria-valuetext={`Nivel ${Math.round(skill.value / 10)} de 10`}
-              ></progress>
-            </li>
-          );
-        })}
-      </ul>
+      <p className="screen-intro">Mi inventario de herramientas, por categoría.</p>
+
+      <div className="inventory">
+        {competencias.map((grupo, i) => (
+          <section
+            key={grupo.categoria}
+            className={`nes-container is-dark with-title inventory-slot ${grupo.color}`}
+            style={{ '--i': i }}
+          >
+            <h2 className="title">{grupo.categoria}</h2>
+            <ul className="tags">
+              {grupo.items.map((item, j) => (
+                <li key={item} className="tag" style={{ '--j': j }}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+
+        <section
+          className="nes-container is-dark with-title inventory-slot is-strengths"
+          style={{ '--i': competencias.length }}
+        >
+          <h2 className="title">Fortalezas</h2>
+          <ul className="strengths">
+            {fortalezas.map((item, j) => (
+              <li key={item} style={{ '--j': j }}>
+                <i className="nes-icon heart is-small" aria-hidden="true"></i>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </Screen>
   );
 };

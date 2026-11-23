@@ -20,7 +20,7 @@ const Hud = () => {
 
   return (
     <header className="hud">
-      <span className="hud-name">{perfil.nombre.toUpperCase()}</span>
+      <span className="hud-name">{perfil.nombre}</span>
       <span className="hud-coins">
         <i className="nes-icon coin is-small" aria-hidden="true"></i>
         <span aria-hidden="true">

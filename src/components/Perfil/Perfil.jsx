@@ -2,19 +2,19 @@ import React from 'react';
 import Screen from '../Screen/Screen';
 import { useVisit } from '../Progress/Progress';
 import { useTypewriter } from '../../hooks/animation';
-import { cursos, experiencias, formacion, habilidades, perfil } from '../../data/cv';
+import { competencias, experiencias, perfil } from '../../data/cv';
 
 const fullText = `"${perfil.bio.join('\n\n')}"`;
 
 const stats = [
+  { value: perfil.aniosExperiencia, label: 'Años de experiencia' },
   { value: experiencias.length, label: 'Empresas' },
-  { value: habilidades.length, label: 'Habilidades' },
-  { value: formacion.length + cursos.length, label: 'Estudios' },
+  { value: competencias.reduce((n, g) => n + g.items.length, 0), label: 'Herramientas' },
 ];
 
 const Perfil = () => {
   useVisit('perfil');
-  const { shown, done, skip } = useTypewriter(fullText);
+  const { shown, done, skip } = useTypewriter(fullText, 16);
 
   return (
     <Screen title="Perfil">
@@ -28,7 +28,7 @@ const Perfil = () => {
               {!done && <span className="caret"></span>}
             </p>
             {done ? (
-              <p className="dialog-sign">— {perfil.nombre}</p>
+              <p className="dialog-sign">— {perfil.nombreCompleto}</p>
             ) : (
               <button type="button" className="dialog-skip" onClick={skip} aria-hidden="true" tabIndex={-1}>
                 Saltar ▶

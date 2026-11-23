@@ -22,7 +22,14 @@ const Inicio = () => {
     <main className="screen nes-container is-dark">
       <div className="title-card">
         <p className="title-kicker">Mi CV interactivo</p>
-        <h1 className="game-title">{perfil.nombre.toUpperCase()}</h1>
+        <h1 className="game-title">
+          {/* Sin toUpperCase: la fuente Press Start 2P no trae la "Ó" mayúscula */}
+          {perfil.nombre
+            .split(' ')
+            .map((word) => (
+              <span key={word}>{word}</span>
+            ))}
+        </h1>
         <p className="game-subtitle">{perfil.titulo}</p>
 
         <i className="nes-mario title-sprite" aria-hidden="true"></i>

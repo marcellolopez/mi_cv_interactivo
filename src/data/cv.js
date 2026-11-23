@@ -1,92 +1,118 @@
 // Todo el contenido del CV vive aquí. Para actualizar el CV basta con editar este archivo.
 
 export const perfil = {
-  nombre: 'Marcello L.',
-  titulo: 'Programador · Desarrollador Web',
+  nombre: 'Marcello López',
+  nombreCompleto: 'Marcello López Cáceres',
+  titulo: 'Desarrollador Full Stack y Especialista en RPA',
+  ubicacion: 'Santiago, Chile',
+  aniosExperiencia: '10+',
   bio: [
-    'Soy un programador y desarrollador web con sólida formación y experiencia en informática, además de ser músico y apasionado de las artes.',
-    'Fusiono creatividad y disciplina para abordar desafíos con innovación. Mi enfoque proactivo ha sido clave para lograr éxitos en diversos proyectos.',
+    'Desarrollador Full Stack y especialista en automatización RPA con más de 10 años de experiencia creando plataformas web, integraciones y soluciones de automatización para sectores como salud, servicios, estudios de mercado y multicanal.',
+    'Experto en PHP/Laravel, Python, Robot Framework, Selenium y OCR, con un fuerte enfoque en la integración de Inteligencia Artificial para optimizar procesos complejos y reducir costos operativos.',
+    'Destaco por mi enfoque analítico, creatividad técnica y capacidad para transformar necesidades de negocio en soluciones mantenibles.',
   ],
 };
 
-// value: dominio de 0 a 100. color: is-primary | is-success | is-warning | is-error
-export const habilidades = [
-  { titulo: 'PHP', value: 85, color: 'is-primary' },
-  { titulo: 'SQL', value: 85, color: 'is-warning' },
-  { titulo: 'Laravel', value: 80, color: 'is-error' },
-  { titulo: 'Selenium', value: 60, color: 'is-success' },
-  { titulo: 'HTML5', value: 85, color: 'is-error' },
-  { titulo: 'CSS', value: 70, color: 'is-primary' },
-  { titulo: 'Javascript', value: 80, color: 'is-warning' },
-  { titulo: 'JQuery', value: 80, color: 'is-success' },
-  { titulo: 'Python', value: 60, color: 'is-warning' },
-  { titulo: 'React JS', value: 50, color: 'is-primary' },
-  { titulo: 'IA', value: 70, color: 'is-success' },
+// color: is-primary | is-success | is-warning | is-error
+export const competencias = [
+  {
+    categoria: 'Automatización & IA',
+    color: 'is-success',
+    items: ['Robot Framework', 'Selenium', 'RPA', 'OCR', 'n8n', 'OpenAI', 'Gemini'],
+  },
+  {
+    categoria: 'Backend',
+    color: 'is-primary',
+    items: ['PHP (Laravel)', 'Python', 'C# (.NET)', 'Node.js', 'APIs REST'],
+  },
+  {
+    categoria: 'Frontend',
+    color: 'is-warning',
+    items: ['React', 'Vue 3', 'JavaScript', 'HTML5', 'CSS', 'Tailwind', 'Vite'],
+  },
+  {
+    categoria: 'Datos & Infraestructura',
+    color: 'is-error',
+    items: ['MySQL', 'PostgreSQL', 'SQLite', 'Power BI', 'Docker', 'Git'],
+  },
+  {
+    categoria: 'Metodologías & Otros',
+    color: 'is-primary',
+    items: ['Scrum', 'Kanban', 'MVC', 'BPMN', 'Linux', 'cPanel', 'VS Code'],
+  },
 ];
+
+export const fortalezas = ['Resolución de problemas', 'Innovación técnica', 'Autonomía'];
 
 export const experiencias = [
   {
-    puesto: 'Desarrollador Senior',
-    fecha: 'jun 2023 - dic 2023',
-    empresa: 'RedSalud CCHC',
+    puesto: 'Desarrollador RPA',
+    fecha: 'jun 2025 - Actualidad',
+    actual: true,
+    empresa: 'BC Digital Services',
     proyectos: [
-      'Proyecto de 6 meses, desarrollos de incidencias',
-      'Desarrollo del 60% de las mejoras para sistema interno de honorarios médicos',
+      'Liderazgo técnico en 4 proyectos de alta complejidad, diseñando automatizaciones robustas para procesos críticos.',
+      'Implementación de Robot Framework, Python y OCR con integraciones avanzadas en SQL.',
+      'Optimización de costos y tiempos mediante el uso estratégico de IA y n8n.',
     ],
-    tecnologias: ['Laravel', 'PostgreSQL', 'CSS', 'Bootstrap'],
+    tecnologias: ['Robot Framework', 'Python', 'OCR', 'SQL', 'IA', 'n8n'],
   },
   {
-    puesto: 'Desarrollador Laravel',
-    fecha: 'mar 2020 - dic 2022',
-    empresa: 'Cetep',
+    puesto: 'Desarrollador Senior',
+    fecha: 'ene 2024 - dic 2024',
+    empresa: 'Celmedia Mobile',
     proyectos: [
-      'Desarrollo plataforma de teleconsultas medicas',
-      'Integraciones como botones de pago, Power BI, RPA, etc',
-      'Lider del equipo de innovación (Alexa Skills, Arduino)',
+      'Desarrollo multicanal con Laravel y Vue 3 para clientes corporativos.',
+      'Integración de LLMs (OpenAI/Gemini) en soluciones de mensajería y chatbots automatizados.',
     ],
-    tecnologias: ['PHP', 'Laravel', 'Selenium', 'Robot Framework'],
+    tecnologias: ['Laravel', 'Vue 3', 'OpenAI', 'Gemini'],
+  },
+  {
+    puesto: 'Desarrollador',
+    fecha: 'jun 2023 - ene 2024',
+    empresa: 'RedSalud CCHC',
+    proyectos: [
+      'Ejecución del 60% de las mejoras en la plataforma interna de honorarios médicos.',
+      'Resolución de incidencias críticas en entornos de salud utilizando Laravel y PostgreSQL.',
+    ],
+    tecnologias: ['Laravel', 'PostgreSQL'],
+  },
+  {
+    puesto: 'Programador Senior',
+    fecha: 'nov 2022 - jun 2023',
+    empresa: 'EOL Research',
+    proyectos: ['Desarrollo de plataformas de estudios de mercado y mantenimiento de sistemas legacy en PHP/Laravel.'],
+    tecnologias: ['PHP', 'Laravel'],
   },
   {
     puesto: 'Analista Programador',
-    fecha: 'ene 2019 - dic 2019',
-    empresa: 'Inveb Chile S.A.',
-    proyectos: ['Desarrollo de proyectos informáticos para importantes clientes'],
-    tecnologias: ['PHP', 'Laravel', 'MySQL', 'PostgreSQL'],
-  },
-  {
-    puesto: 'Programador',
-    fecha: 'dic 2016 - mar 2018',
-    empresa: 'Eol Research',
+    fecha: 'feb 2020 - nov 2022',
+    empresa: 'Grupo Cetep',
     proyectos: [
-      'Desarrollador para el área de estudios de mercado',
-      'Mejora de procesos a proyectos de 4 importantes clientes',
+      'Evolución de plataforma de teleconsultas médicas con PHP y Laravel.',
+      'Integraciones con botones de pago, Power BI y RPA. Liderazgo de equipo de innovación.',
     ],
-    tecnologias: ['Laravel', 'ASP.net', 'Python', 'ChatGPT'],
+    tecnologias: ['PHP', 'Laravel', 'Power BI', 'RPA'],
   },
   {
-    puesto: 'Programador',
-    fecha: 'ene 2015 - dic 2015',
-    empresa: 'Aguas décima S.A., Valdivia',
-    proyectos: ['Desarrollador de plataforma web para pagos online', 'Reducción de filas en un 30%'],
-    tecnologias: ['PHP', 'API Servipag', 'MySQL', 'JavaScript', 'C#'],
+    puesto: 'Desarrollador PHP',
+    fecha: 'may 2019 - feb 2020',
+    empresa: 'Ingenia Global / Inveb Chile',
+    proyectos: ['Creación de APIs para sector salud y desarrollo de proyectos con Laravel y PostgreSQL.'],
+    tecnologias: ['APIs', 'Laravel', 'PostgreSQL'],
   },
 ];
 
-export const formacion = [
-  { titulo: 'Analista programador', fecha: 'ene 2013 - jun 2015', institucion: 'Inacap, Valdivia' },
-];
+export const formacion = [{ titulo: 'Analista Programador', fecha: '2013 - 2015', institucion: 'INACAP' }];
 
+// fecha e institucion son opcionales.
 export const cursos = [
-  { titulo: 'Curso de Laravel', fecha: 'abr 2019', institucion: 'Curso metodología e-learning en Udemy' },
-  { titulo: 'Javascript', fecha: 'ago 2017', institucion: 'Curso metodología e-learning en CodeAcademy' },
-  { titulo: 'jQuery', fecha: 'ago 2017', institucion: 'Curso metodología e-learning en CodeAcademy' },
-  { titulo: 'React JS', fecha: 'sep 2023', institucion: 'Curso de 30 horas (clases en vivo) en Coderhouse' },
-  {
-    titulo: 'IA para programadores',
-    fecha: 'dic 2023',
-    institucion: 'Curso híbrido en Coderhouse: "prompt engineering para programadores"',
-  },
-  { titulo: 'C# Avanzado', fecha: 'ene 2024', institucion: 'Curso metodología e-learning de LinkedIn Learning' },
+  { titulo: 'React JS', fecha: 'sep 2023', institucion: 'Coderhouse' },
+  { titulo: 'IA para Programadores', fecha: 'dic 2023', institucion: 'Coderhouse' },
+  { titulo: 'C# Avanzado', fecha: 'ene 2024', institucion: 'LinkedIn Learning' },
+  { titulo: 'Fundamentos de IA' },
+  { titulo: 'Laravel', fecha: 'abr 2019', institucion: 'Udemy' },
+  { titulo: 'JavaScript', fecha: 'ago 2017', institucion: 'CodeAcademy' },
 ];
 
 export const contacto = {
