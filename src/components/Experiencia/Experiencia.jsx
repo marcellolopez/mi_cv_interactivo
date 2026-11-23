@@ -1,91 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSound } from '../Sounds/Sounds';
-import back from '/src/assets/fx/back.mp3';
+import Screen from '../Screen/Screen';
+import { useVisit } from '../Progress/Progress';
+import { experiencias } from '../../data/cv';
 
 const Experiencia = () => {
-  const { allowSounds, playSound, stopMusic } = useSound();
-
-  const HandleBack = () => {
-    if (allowSounds) {
-      playSound(back, 0.5);
-    }
-  }
-
-  const experiencias = [
-    {
-      puesto: 'Desarrollador Senior',
-      fecha: 'jun 2023 - dic 2023',
-      empresa: 'RedSalud CCHC',
-      proyectos: [
-        'Proyecto de 6 meses, desarrollos de incidencias',
-        'Desarrollo del 60% de las mejoras para sistema interno de honorarios médicos',
-      ],
-      tecnologias: ['Laravel', 'PostgreSQL', 'CSS', 'Bootstrap'],
-    },
-    {
-      puesto: 'Desarrollador Laravel',
-      fecha: 'mar 2020 - dic 2022',
-      empresa: 'Cetep',
-      proyectos: [
-        'Desarrollo plataforma de teleconsultas medicas',
-        'Integraciones como botones de pago, Power BI, RPA, etc',
-        'Lider del equipo de innovación (Alexa Skills, Arduino)',
-      ],
-      tecnologias: ['PHP', 'Laravel', 'Selenium', 'Robot Framework'],
-    },
-    {
-      puesto: 'Analista Programador',
-      fecha: 'ene 2019 - dic 2019',
-      empresa: 'Inveb Chile S.A.',
-      proyectos: ['Desarrollo de proyectos informáticos para importantes clientes'],
-      tecnologias: ['PHP', 'Laravel', 'MySQL', 'PostgreSQL'],
-    },
-    {
-      puesto: 'Programador',
-      fecha: 'dic 2016 - mar 2018',
-      empresa: 'Eol Research',
-      proyectos: [
-        'Desarrollador para el área de estudios de mercado',
-        'Mejora de procesos a proyectos de 4 importantes clientes',
-      ],
-      tecnologias: ['Laravel', 'ASP.net', 'Python', 'ChatGPT'],
-    },
-    {
-      puesto: 'Programador',
-      fecha: 'ene 2015 - dic 2015',
-      empresa: 'Aguas décima S.A., Valdivia',
-      proyectos: ['Desarrollador de plataforma web para pagos online', 'Reducción de filas en un 30%'],
-      tecnologias: ['PHP', 'API Servipag', 'MySQL', 'JavaScript', 'C#'],
-    },
-  ];
+  useVisit('experiencia');
 
   return (
-    <div>
-      <div className="nes-container is-dark  vh overflow-y-auto overflow-x-hidden ">
-      <div className="nes-container is-dark with-title">
-        <h2 className="title">Experiencia</h2>
-        {experiencias.map((experiencia, index) => (
-          <div className='contenido' key={index}>
-            <h5>{experiencia.puesto}</h5>
-            <p>{experiencia.fecha}</p>
-            <p className='text-decoration-underline'>{experiencia.empresa}</p>
-            <ul className='nes-list is-circle'>
-              {experiencia.proyectos.map((proyecto, proyectoIndex) => (
-                <li className='mb-3' key={proyectoIndex}>{proyecto}</li>
-              ))}
-            </ul>
-            <p className='two-line-paragraph'> <label> Tecnologías: </label> <br /> {experiencia.tecnologias.join(', ')}</p>
-            <div className="mt-5 mb-5 border-top"></div>
-
-          </div>
+    <Screen title="Experiencia">
+      <p className="screen-intro">Misiones completadas, de la más reciente a la más antigua.</p>
+      <ol className="quests">
+        {experiencias.map((exp, index) => (
+          <li key={`${exp.empresa}-${exp.fecha}`} className="quest" style={{ '--i': index }}>
+            <article className="nes-container is-dark with-title">
+              <p className="title">Misión {experiencias.length - index}</p>
+              <h2 className="quest-role">{exp.puesto}</h2>
+              <p className="quest-company">{exp.empresa}</p>
+              <p className="quest-date">{exp.fecha}</p>
+              <ul className="nes-list is-circle quest-list">
+                {exp.proyectos.map((proyecto) => (
+                  <li key={proyecto}>{proyecto}</li>
+                ))}
+              </ul>
+              <ul className="tags" aria-label="Tecnologías">
+                {exp.tecnologias.map((tec) => (
+                  <li key={tec} className="tag">
+                    {tec}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </li>
         ))}
-      </div>
-      <div className="volver-link">
-        <Link to="/MainMenu" className="nes-btn" onClick={HandleBack}>Volver</Link>
-      </div>  
-      </div>
-    </div>
+      </ol>
+    </Screen>
   );
 };
 

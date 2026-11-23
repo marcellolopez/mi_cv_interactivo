@@ -1,113 +1,73 @@
 // src/components/main_menu/MainMenu.jsx
-import React, { useEffect, useRef } from 'react';
-import Sounds, { useSound } from '../Sounds/Sounds';
+import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import 'nes.css/css/nes.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import pickUpCoin from '/src/assets/fx/pickUpCoin.wav';
-import hit from '/src/assets/fx/hit-8bit.mp3';
-import pong from '/src/assets/fx/pong.mp3';
-import pluck from '/src/assets/fx/pluck.mp3';
+import { useSound } from '../Sounds/Sounds';
+import { useProgress } from '../Progress/Progress';
+import Screen from '../Screen/Screen';
+import { useArrowNav } from '../../hooks/animation';
+import { contacto } from '../../data/cv';
+
+const ITEMS = [
+  { to: '/perfil', label: 'Perfil', desc: 'Quién soy', color: 'is-primary', sound: ['pickUpCoin', 0.5], section: 'perfil' },
+  { to: '/competencias', label: 'Habilidades', desc: 'Mis stats', color: 'is-success', sound: ['hit', 0.2], section: 'habilidades' },
+  { to: '/experiencia', label: 'Experiencia', desc: 'Misiones', color: 'is-warning', sound: ['pong', 1], section: 'experiencia' },
+  { to: '/estudios', label: 'Estudios', desc: 'Logros', color: 'is-error', sound: ['pluck', 0.6], section: 'estudios' },
+  { to: '/contacto', label: 'Contacto', desc: 'Hablemos', color: '', sound: ['enter', 0.6] },
+];
 
 const MainMenu = () => {
+  const { playSound } = useSound();
+  const { visited } = useProgress();
+  const onMove = useCallback(() => playSound('hit', 0.08), [playSound]);
+  const nav = useArrowNav(onMove);
 
-  // Lista de archivos de sonido que quieres precargar
-  const soundFiles = ['pickUpCoin.wav', 'progress.mp3', 'enter.mp3', 'hit-8bit.mp3', 'pong.mp3', 'back.mp3'];
-
-
-  // Precarga los archivos de sonido cuando el componente se monta
+  // Como en un juego: el cursor parte en la primera opción.
   useEffect(() => {
-    soundFiles.forEach((audioFile) => {
-      console.log(audioFile);
-      const audioElement = new Audio('/assets/fx/' + {audioFile});
-      audioElement.preload = 'auto';      
-      audioElement.volume = 0.0;
-      audioElement.play()
-    });
-  }, []); 
+    nav.ref.current?.querySelector('a')?.focus();
+  }, [nav.ref]);
 
-  const { allowSounds, playSound } = useSound();
-  console.log(allowSounds)
-  const HandlePickUpCoin = () => {
-    if (allowSounds) {
-      playSound(pickUpCoin, 0.5);
-    }
-  }
-
-  const HandleHit = () => {
-    if (allowSounds) {
-      playSound(hit, 0.2);
-    }
-  }
-
-  const HandlePong = () => {
-    if (allowSounds) {
-      playSound(pong, 1);
-    }
-  }
-
-  const HandlePluck = () => {
-    if (allowSounds) {
-      playSound(pluck, 0.6);
-    }
-  }
   return (
-    <>
-      <div className="nes-container container-main-menu is-dark vh">
-        <div className="main-menu text-center is-dark">
-          <h3 className="mb-5 mt-2">Bienvenido a mi CV</h3>
-
-          <div className="d-flex justify-content-center">
-            <ul className="nes-list ul-margin">
-              <li className="mb-4">
-                <Link className='nes-btn is-primary w-100' to="/perfil" onClick={HandlePickUpCoin}>Perfil</Link>
+    <Screen title="Menú principal" back={false} focusTitle={false}>
+      <nav aria-label="Secciones del CV">
+        <ul className="menu" ref={nav.ref} onKeyDown={nav.onKeyDown}>
+          {ITEMS.map((item, index) => {
+            const done = item.section && visited.includes(item.section);
+            return (
+              <li key={item.to} style={{ '--i': index }}>
+                <Link
+                  to={item.to}
+                  className={`nes-btn menu-item ${item.color}`}
+                  onClick={() => playSound(...item.sound)}
+                >
+                  <span>
+                    {item.label}
+                    <span className="menu-desc">{item.desc}</span>
+                  </span>
+                  {done && (
+                    <span className="menu-check">
+                      <span aria-hidden="true">★</span>
+                      <span className="visually-hidden"> (visitada)</span>
+                    </span>
+                  )}
+                </Link>
               </li>
-              <li className="mb-4">
-                <Link className='nes-btn is-success w-100' to="/competencias" onClick={HandleHit}>Competencias</Link>
-              </li>
-              <li className="mb-4">
-                <Link className='nes-btn is-warning w-100' to="/experiencia" onClick={HandlePong}>Experiencia</Link>
-              </li>
-              <li className="mb-4">
-                <Link className='nes-btn is-error w-100' to="/estudios" onClick={HandlePluck}>Estudios</Link>
-              </li>
-              <li className="mb-4">
-                <Link className='nes-btn w-100' to="/" onClick={HandlePickUpCoin}>Opciones</Link>
-              </li>              
-            </ul>
-          </div>
+            );
+          })}
+        </ul>
+      </nav>
 
-          <div className='d-none d-sm-block col-4 offset-4 mt-4'>
-            <div className="d-flex justify-content-around align-items-end">
-              <a href="mailto:mlc74163322@gmail.com" target="_blank" rel="noopener noreferrer">
-                <i className="nes-icon gmail is-medium"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/marcellolc/" target="_blank" rel="noopener noreferrer">
-                <i className="nes-icon linkedin is-medium"></i>
-              </a>
-              <a href="https://github.com/marcellolopez" target="_blank" rel="noopener noreferrer">
-                <i className="nes-icon github is-medium"></i>
-              </a>
-            </div>
-          </div>
-
-          <div className='d-sm-none col-12'>
-            <div className="d-flex justify-content-around align-items-end">
-              <a href="mailto:mlc74163322@gmail.com" target="_blank" rel="noopener noreferrer">
-                <i className="nes-icon gmail is-medium"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/marcellolc/" target="_blank" rel="noopener noreferrer">
-                <i className="nes-icon linkedin is-medium"></i>
-              </a>
-              <a href="https://github.com/marcellolopez" target="_blank" rel="noopener noreferrer">
-                <i className="nes-icon github is-medium"></i>
-              </a>
-            </div>
-          </div>
-
-        </div>
+      <div className="contact-row">
+        <a href={`mailto:${contacto.email}`} aria-label="Enviar correo">
+          <i className="nes-icon gmail is-medium" aria-hidden="true"></i>
+        </a>
+        <a href={contacto.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (abre en otra pestaña)">
+          <i className="nes-icon linkedin is-medium" aria-hidden="true"></i>
+        </a>
+        <a href={contacto.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub (abre en otra pestaña)">
+          <i className="nes-icon github is-medium" aria-hidden="true"></i>
+        </a>
       </div>
-    </>
+    </Screen>
   );
 };
 
