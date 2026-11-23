@@ -17,17 +17,25 @@ const niveles = [...experiencias].reverse().map((exp, index) => ({
   meses: monthsBetween(exp.fecha),
 }));
 const maxMeses = Math.max(...niveles.map((n) => n.meses));
+
+// Trabajos de menos de un año se marcan como proyecto definido
+// (se puede forzar con `proyecto: true/false` en cv.js).
+const esProyecto = (mision) => mision.proyecto ?? (!mision.actual && mision.meses < 12);
+
+// Relleno de la barra: escala con raíz cuadrada y un mínimo del 35%, para que
+// los trabajos de pocos meses también se vean con una barra contundente.
+const xpPercent = (meses) => Math.round(35 + 65 * Math.sqrt(meses / maxMeses));
 const completadas = niveles.filter((n) => !n.actual).length;
 
 const XpBar = ({ meses }) => {
   const progress = useAnimationProgress(700);
-  const value = Math.round(meses * progress);
+  const value = Math.round(xpPercent(meses) * progress);
   return (
     <div className="xp">
       <span className="xp-label" aria-hidden="true">
         XP
       </span>
-      <progress className="nes-progress is-success xp-bar" value={value} max={maxMeses} aria-hidden="true"></progress>
+      <progress className="nes-progress is-success xp-bar" value={value} max="100" aria-hidden="true"></progress>
       <span className="xp-value">{formatDuration(meses)}</span>
     </div>
   );
@@ -42,7 +50,10 @@ const MissionCard = ({ mision }) => (
       <div>
         <h2 className="quest-role">{mision.puesto}</h2>
         <p className="quest-company">{mision.empresa}</p>
-        <p className="quest-date">{mision.fecha}</p>
+        <p className="quest-date">
+          {mision.fecha}
+          {esProyecto(mision) && <span className="mission-project">(Proyecto)</span>}
+        </p>
       </div>
       {mision.actual ? (
         <span className="quest-live">En curso</span>
