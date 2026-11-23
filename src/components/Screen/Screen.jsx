@@ -1,9 +1,9 @@
 // Marco común de cada pantalla: HUD, título, contenido con scroll y botón Volver.
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSound } from '../Sounds/Sounds';
 import { useProgress } from '../Progress/Progress';
-import { useSteppedScroll } from '../../hooks/animation';
+import { useArrowKeys, useSteppedScroll } from '../../hooks/animation';
 import { perfil } from '../../data/cv';
 
 const Hud = () => {
@@ -44,8 +44,11 @@ const Screen = ({ title, children, back = true, focusTitle = true, className = '
   const { playSound } = useSound();
   const navigate = useNavigate();
   const titleRef = useRef(null);
+  const rootRef = useRef(null);
   const bodyRef = useRef(null);
-  useSteppedScroll(bodyRef);
+  const scrollBy = useSteppedScroll(bodyRef);
+  const onMove = useCallback(() => playSound('hit', 0.08), [playSound]);
+  useArrowKeys(rootRef, bodyRef, scrollBy, onMove);
 
   // Al cambiar de pantalla, el foco va al título (lectores de pantalla y teclado).
   useEffect(() => {
@@ -66,7 +69,7 @@ const Screen = ({ title, children, back = true, focusTitle = true, className = '
   }, [back, navigate, playSound]);
 
   return (
-    <main className={`screen nes-container is-dark ${className}`}>
+    <main className={`screen nes-container is-dark ${className}`} ref={rootRef}>
       <Hud />
       {title && (
         <h1 className="screen-title" ref={titleRef} tabIndex={-1}>

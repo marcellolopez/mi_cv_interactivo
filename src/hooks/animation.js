@@ -89,57 +89,153 @@ export const useArrowNav = (onMove) => {
 };
 
 // Scroll "a saltos", como si la pantalla corriera a pocos fotogramas por segundo
-// (igual que las transiciones con steps()). Solo intercepta la rueda del mouse
-// o el touchpad; el scroll táctil, el teclado y la barra siguen siendo nativos.
+// (igual que las transiciones con steps()). Se usa con la rueda del mouse o el
+// touchpad y con las flechas del teclado (vía scrollBy). El scroll táctil y la
+// barra siguen siendo nativos.
 export const useSteppedScroll = (ref, fps = 12) => {
   const reduced = usePrefersReducedMotion();
+  const state = useRef({ target: null, timer: null });
+
+  const tick = useCallback(() => {
+    const el = ref.current;
+    const st = state.current;
+    if (!el) return;
+    const max = el.scrollHeight - el.clientHeight;
+    st.target = Math.max(0, Math.min(max, st.target));
+    const diff = st.target - el.scrollTop;
+    if (Math.abs(diff) < 1) {
+      clearInterval(st.timer);
+      st.timer = null;
+      st.target = null;
+      return;
+    }
+    // Cada fotograma avanza casi la mitad de lo que falta, en saltos visibles.
+    const step = Math.sign(diff) * Math.max(8, Math.ceil(Math.abs(diff) * 0.45));
+    el.scrollTop += Math.abs(step) > Math.abs(diff) ? diff : step;
+  }, [ref]);
+
+  // Desplaza `delta` píxeles. Devuelve false si ya no hay hacia dónde moverse.
+  const scrollBy = useCallback(
+    (delta) => {
+      const el = ref.current;
+      const st = state.current;
+      if (!el) return false;
+      const max = el.scrollHeight - el.clientHeight;
+      const base = st.target ?? el.scrollTop;
+      const next = Math.max(0, Math.min(max, base + delta));
+      if (Math.abs(next - base) < 1) return false;
+      if (reduced) {
+        el.scrollTop = next;
+        return true;
+      }
+      st.target = next;
+      if (!st.timer) {
+        tick();
+        st.timer = setInterval(tick, 1000 / fps);
+      }
+      return true;
+    },
+    [ref, reduced, tick, fps],
+  );
 
   useEffect(() => {
     const el = ref.current;
+    const st = state.current;
     if (!el || reduced) return undefined;
-
-    let target = null;
-    let timer = null;
-
-    const stop = () => {
-      clearInterval(timer);
-      timer = null;
-      target = null;
-    };
-
-    const tick = () => {
-      const max = el.scrollHeight - el.clientHeight;
-      target = Math.max(0, Math.min(max, target));
-      const diff = target - el.scrollTop;
-      if (Math.abs(diff) < 1) {
-        stop();
-        return;
-      }
-      // Cada fotograma avanza casi la mitad de lo que falta, en saltos visibles.
-      const step = Math.sign(diff) * Math.max(8, Math.ceil(Math.abs(diff) * 0.45));
-      el.scrollTop += Math.abs(step) > Math.abs(diff) ? diff : step;
-    };
-
     const onWheel = (event) => {
       if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
-      const max = el.scrollHeight - el.clientHeight;
-      if (max <= 0) return;
       const unit = event.deltaMode === 1 ? 40 : event.deltaMode === 2 ? el.clientHeight : 1;
-      const base = target ?? el.scrollTop;
-      const next = Math.max(0, Math.min(max, base + event.deltaY * unit));
-      if (next === base) return;
-      event.preventDefault();
-      target = next;
-      if (!timer) {
-        tick();
-        timer = setInterval(tick, 1000 / fps);
-      }
+      if (scrollBy(event.deltaY * unit)) event.preventDefault();
     };
-
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => {
       el.removeEventListener('wheel', onWheel);
-      clearInterval(timer);
+      clearInterval(st.timer);
+      st.timer = null;
+      st.target = null;
     };
-  }, [ref, fps, reduced]);
+  }, [ref, reduced, scrollBy]);
+
+  return scrollBy;
+};
+
+const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
+const KEY_DIR = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 };
+
+// Flechas como en un juego en cualquier pantalla: mueven el cursor (foco) al
+// botón o enlace siguiente/anterior. Si ese botón todavía no se ve, primero
+// desplazan el contenido a saltos hasta mostrarlo; si no hay más botones en esa
+// dirección, simplemente desplazan. Los componentes que ya usan las flechas
+// (menú, mapa de Experiencia) llaman a preventDefault y tienen prioridad.
+export const useArrowKeys = (rootRef, bodyRef, scrollBy, onMove) => {
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      const dir = KEY_DIR[event.key];
+      const root = rootRef.current;
+      const body = bodyRef.current;
+      if (!dir || event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || !root) return;
+      const active = document.activeElement;
+      if (active?.matches('input, select, textarea')) return;
+
+      const items = [...root.querySelectorAll(FOCUSABLE)].filter(
+        (el) =>
+          el.getAttribute('tabindex') !== '-1' &&
+          !el.closest('.hud, [aria-hidden="true"]') &&
+          el.offsetParent !== null,
+      );
+      const inside = root.contains(active) && active !== root;
+      const after = (el) => active.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING;
+      let next;
+      if (items.includes(active)) {
+        next = items[items.indexOf(active) + dir];
+      } else if (inside) {
+        next = dir > 0 ? items.find((el) => after(el)) : [...items].reverse().find((el) => !after(el));
+      } else {
+        next = dir > 0 ? items[0] : items[items.length - 1];
+      }
+
+      const vertical = event.key === 'ArrowDown' || event.key === 'ArrowUp';
+      const stepPx = body ? Math.round(body.clientHeight * 0.35) : 0;
+
+      // El botón Volver está fuera del área con scroll: antes de saltar a él,
+      // termina de recorrer el contenido.
+      if (next && body && !body.contains(next) && vertical && dir > 0 && scrollBy(stepPx)) {
+        event.preventDefault();
+        return;
+      }
+
+      if (next && body?.contains(next)) {
+        const view = body.getBoundingClientRect();
+        const rect = next.getBoundingClientRect();
+        const margin = 12;
+        if (rect.top < view.top + margin) {
+          event.preventDefault();
+          const need = rect.top - view.top - margin;
+          if (-need > stepPx && vertical) {
+            scrollBy(-stepPx);
+            return;
+          }
+          scrollBy(need);
+        } else if (rect.bottom > view.bottom - margin) {
+          event.preventDefault();
+          const need = rect.bottom - view.bottom + margin;
+          if (need > stepPx && vertical) {
+            scrollBy(stepPx);
+            return;
+          }
+          scrollBy(need);
+        }
+      }
+
+      if (next) {
+        event.preventDefault();
+        next.focus({ preventScroll: true });
+        onMove?.();
+        return;
+      }
+      if (vertical && body && scrollBy(dir * stepPx)) event.preventDefault();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [rootRef, bodyRef, scrollBy, onMove]);
 };
