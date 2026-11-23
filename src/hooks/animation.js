@@ -16,6 +16,31 @@ export const usePrefersReducedMotion = () => {
   return reduced;
 };
 
+// Avanza de 0 a 1 durante `duration` ms en saltos fijos (look retro y
+// pocas renderizaciones, para que vaya fluido incluso en móviles modestos).
+export const useAnimationProgress = (duration = 1500, stepMs = 60) => {
+  const reduced = usePrefersReducedMotion();
+  const [progress, setProgress] = useState(reduced ? 1 : 0);
+
+  useEffect(() => {
+    if (reduced) {
+      setProgress(1);
+      return undefined;
+    }
+    const steps = Math.max(1, Math.round(duration / stepMs));
+    let step = 0;
+    setProgress(0);
+    const id = setInterval(() => {
+      step += 1;
+      setProgress(Math.min(1, step / steps));
+      if (step >= steps) clearInterval(id);
+    }, stepMs);
+    return () => clearInterval(id);
+  }, [duration, stepMs, reduced]);
+
+  return progress;
+};
+
 // Efecto máquina de escribir; `skip` muestra todo el texto de inmediato.
 export const useTypewriter = (text, speed = 28) => {
   const reduced = usePrefersReducedMotion();

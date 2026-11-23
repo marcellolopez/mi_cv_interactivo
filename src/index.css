@@ -498,10 +498,34 @@ a.nes-btn:hover {
   color: var(--error);
 }
 
+.load-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.55rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.load-count {
+  color: var(--warning);
+}
+
+.inventory-slot .load-bar {
+  height: 22px;
+  margin: 0 0 1rem;
+}
+
+/* Las herramientas aparecen a medida que la barra avanza */
 .inventory-slot .tag {
-  animation: pop-in 0.3s steps(3) both;
-  animation-delay: calc(var(--i) * 140ms + 200ms + var(--j) * 70ms);
   transition: transform 0.15s steps(2);
+}
+
+.inventory-slot .tag.is-pending {
+  visibility: hidden;
+}
+
+.inventory-slot .tag.is-shown {
+  animation: pop-in 0.25s steps(3) both;
 }
 
 .inventory-slot .tag:hover {
@@ -522,8 +546,13 @@ a.nes-btn:hover {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  visibility: hidden;
+}
+
+.is-strengths.is-ready .strengths li {
+  visibility: visible;
   animation: pop-in 0.3s steps(3) both;
-  animation-delay: calc(var(--i) * 140ms + 200ms + var(--j) * 120ms);
+  animation-delay: calc(var(--j) * 150ms);
 }
 
 .is-strengths .title {
