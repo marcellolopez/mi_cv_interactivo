@@ -11,6 +11,7 @@ const ITEMS = [
   { to: '/perfil', label: 'Perfil', desc: 'Quién soy', color: 'is-primary', sound: ['pickUpCoin', 0.5], section: 'perfil' },
   { to: '/competencias', label: 'Habilidades', desc: 'Mis stats', color: 'is-success', sound: ['hit', 0.2], section: 'habilidades' },
   { to: '/experiencia', label: 'Experiencia', desc: 'Misiones', color: 'is-warning', sound: ['pong', 1], section: 'experiencia' },
+  { to: '/proyectos', label: 'Proyectos', desc: 'Mis creaciones', color: 'is-primary', sound: ['pickUpCoin', 0.4], section: 'proyectos' },
   { to: '/estudios', label: 'Estudios', desc: 'Logros', color: 'is-error', sound: ['pluck', 0.6], section: 'estudios' },
   { to: '/contacto', label: 'Contacto', desc: 'Hablemos', color: '', sound: ['enter', 0.6] },
 ];

@@ -8,6 +8,7 @@ export const SECTIONS = {
   perfil: 'Perfil',
   habilidades: 'Habilidades',
   experiencia: 'Experiencia',
+  proyectos: 'Proyectos',
   estudios: 'Estudios',
 };
 const TOTAL = Object.keys(SECTIONS).length;

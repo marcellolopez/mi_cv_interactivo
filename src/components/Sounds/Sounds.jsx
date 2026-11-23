@@ -1,6 +1,6 @@
 // src/components/Sounds/Sounds.jsx
 import React, { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
-import { Howl } from 'howler';
+import { Howl, Howler } from 'howler';
 
 import back from '/src/assets/fx/back.mp3';
 import bgMusic from '/src/assets/fx/bg-music.mp3';
@@ -49,6 +49,25 @@ const Sounds = ({ children }) => {
     effect.volume(volume, id);
   }, []);
 
+  // "Bip" de tecla estilo diálogo de RPG, sintetizado con Web Audio (sin
+  // archivos): una onda cuadrada muy corta con un tono que varía un poco.
+  const playBlip = useCallback((volume = 0.04) => {
+    if (!allowRef.current) return;
+    const ctx = Howler.ctx;
+    if (!ctx || ctx.state !== 'running') return;
+    const t = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(480 + Math.random() * 160, t);
+    gain.gain.setValueAtTime(volume, t);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+    osc.connect(gain);
+    gain.connect(Howler.masterGain || ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.05);
+  }, []);
+
   const playBackgroundMusic = useCallback((volume = 0.2) => {
     if (!allowRef.current) return;
     music.volume(volume);
@@ -66,8 +85,8 @@ const Sounds = ({ children }) => {
   }, []);
 
   const value = useMemo(
-    () => ({ allowSounds, setAllowSounds, playSound, playBackgroundMusic, stopMusic }),
-    [allowSounds, setAllowSounds, playSound, playBackgroundMusic, stopMusic],
+    () => ({ allowSounds, setAllowSounds, playSound, playBlip, playBackgroundMusic, stopMusic }),
+    [allowSounds, setAllowSounds, playSound, playBlip, playBackgroundMusic, stopMusic],
   );
 
   return <SoundContext.Provider value={value}>{children}</SoundContext.Provider>;

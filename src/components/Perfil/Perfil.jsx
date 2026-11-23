@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Screen from '../Screen/Screen';
+import { useSound } from '../Sounds/Sounds';
 import { useVisit } from '../Progress/Progress';
 import { useTypewriter } from '../../hooks/animation';
-import { competencias, experiencias, perfil } from '../../data/cv';
+import { competencias, experiencias, perfil, proyectos } from '../../data/cv';
 
 const fullText = `"${perfil.bio.join('\n\n')}"`;
 
+// Suena un "bip" cada BLIP_EVERY letras (no en espacios), como en los diálogos de RPG.
+const BLIP_EVERY = 3;
+
 const stats = [
   { value: perfil.aniosExperiencia, label: 'Años de experiencia' },
-  { value: experiencias.length, label: 'Empresas' },
+  { value: new Set(experiencias.map((e) => e.empresa)).size, label: 'Empresas' },
+  { value: proyectos.length, label: 'Proyectos' },
   { value: competencias.reduce((n, g) => n + g.items.length, 0), label: 'Herramientas' },
 ];
 
 const Perfil = () => {
   useVisit('perfil');
+  const { playBlip } = useSound();
   const { shown, done, skip } = useTypewriter(fullText, 16);
+  const count = shown.length;
+
+  useEffect(() => {
+    if (done || count === 0 || count % BLIP_EVERY !== 0) return;
+    if (/\s/.test(fullText[count - 1])) return;
+    playBlip();
+  }, [count, done, playBlip]);
 
   return (
     <Screen title="Perfil">

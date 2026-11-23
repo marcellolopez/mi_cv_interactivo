@@ -11,6 +11,7 @@ import Perfil from './components/Perfil/Perfil';
 import Competencias from './components/Competencias/Competencias';
 import Experiencia from './components/Experiencia/Experiencia';
 import Estudios from './components/Estudios/Estudios';
+import Proyectos from './components/Proyectos/Proyectos';
 import Contacto from './components/Contacto/Contacto';
 
 // La key cambia con la ruta: cada pantalla entra con la animación de transición.
@@ -24,6 +25,7 @@ const AnimatedRoutes = () => {
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/competencias" element={<Competencias />} />
         <Route path="/experiencia" element={<Experiencia />} />
+        <Route path="/proyectos" element={<Proyectos />} />
         <Route path="/estudios" element={<Estudios />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="*" element={<Navigate to="/" replace />} />
