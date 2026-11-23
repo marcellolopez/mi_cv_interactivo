@@ -1,50 +1,54 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Perfil.css';
-import { useSound } from '../Sounds/Sounds';
-import back from '/src/assets/fx/back.mp3';
+import Screen from '../Screen/Screen';
+import { useVisit } from '../Progress/Progress';
+import { useTypewriter } from '../../hooks/animation';
+import { cursos, experiencias, formacion, habilidades, perfil } from '../../data/cv';
+
+const fullText = `"${perfil.bio.join('\n\n')}"`;
+
+const stats = [
+  { value: experiencias.length, label: 'Empresas' },
+  { value: habilidades.length, label: 'Habilidades' },
+  { value: formacion.length + cursos.length, label: 'Estudios' },
+];
 
 const Perfil = () => {
+  useVisit('perfil');
+  const { shown, done, skip } = useTypewriter(fullText);
 
-  const { allowSounds, playSound } = useSound();
-
-  const HandleBack = () => {
-    if (allowSounds) {
-      playSound(back, 0.5);
-    }
-  }
-    
   return (
-    <>
-    <div className="nes-container is-dark  vh overflow-y-auto overflow-x-hidden ">
-      <div className='perfil-container  position-relative '>
-        <section className="message -left">
-          <div className="nes-balloon is-dark from-left text-justify">
-            <p>"Soy un programador y desarrollador web con sólida formación y
-              experiencia en informática, además de ser músico y apasionado
-              de las artes. 
-            </p> 
-            <p>
-              Fusiono creatividad y disciplina para abordar desafíos
-              con innovación. Mi enfoque proactivo ha sido clave para lograr
-              éxitos en diversos proyectos."
+    <Screen title="Perfil">
+      <div className="perfil">
+        <section className="dialog">
+          <div className="nes-balloon is-dark from-left dialog-balloon">
+            {/* Texto completo para lectores de pantalla; el animado es solo visual. */}
+            <p className="visually-hidden">{fullText}</p>
+            <p className="dialog-text" aria-hidden="true" onClick={skip}>
+              {shown}
+              {!done && <span className="caret"></span>}
             </p>
-            <br />
-            <p className='text-end'>Marcello L.</p>
+            {done ? (
+              <p className="dialog-sign">— {perfil.nombre}</p>
+            ) : (
+              <button type="button" className="dialog-skip" onClick={skip} aria-hidden="true" tabIndex={-1}>
+                Saltar ▶
+              </button>
+            )}
           </div>
-          <div className='float-right'>
-            <i className="nes-mario"></i>
-          </div>
+          <i className="nes-mario dialog-sprite" aria-hidden="true"></i>
         </section>
 
+        <ul className="stats">
+          {stats.map((stat, index) => (
+            <li key={stat.label} className="stat" style={{ '--i': index }}>
+              <span className="stat-value">{stat.value}</span>
+              <span className="stat-label">{stat.label}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="volver-link">
-        <Link to="/MainMenu" className="nes-btn" onClick={HandleBack}>Volver</Link>
-      </div>  
-    </div>
-    </>
-  
+    </Screen>
   );
-}
+};
 
 export default Perfil;

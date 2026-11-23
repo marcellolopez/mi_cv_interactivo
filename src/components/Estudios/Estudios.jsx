@@ -1,82 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Sounds, { useSound } from '../Sounds/Sounds';
-import back from '/src/assets/fx/back.mp3';
+import Screen from '../Screen/Screen';
+import { useVisit } from '../Progress/Progress';
+import { cursos, formacion } from '../../data/cv';
+
+const Logro = ({ item, icon, index, featured = false }) => (
+  <li className={`achievement ${featured ? 'is-featured' : ''}`} style={{ '--i': index }}>
+    <i className={`nes-icon ${icon} ${featured ? 'is-medium' : 'is-small'}`} aria-hidden="true"></i>
+    <div>
+      <h3 className="achievement-title">{item.titulo}</h3>
+      <p className="achievement-meta">{item.institucion}</p>
+      <p className="achievement-date">{item.fecha}</p>
+    </div>
+  </li>
+);
 
 const Estudios = () => {
-  const { allowSounds, playSound } = useSound();
-  
-  const estudios = [
-    {
-      tipo: 'FORMACIÓN',
-      titulo: 'Analista programador',
-      fecha: 'ene 2013 - jun 2015',
-      institucion: 'Inacap, Valdivia',
-    },
-    {
-      tipo: 'CURSOS',
-      titulo: 'Curso de Laravel',
-      fecha: 'abr 2019',
-      institucion: 'Curso metodología e-learning en Udemy',
-    },
-    {
-      tipo: '',
-      titulo: 'Javascript',
-      fecha: 'ago 2017',
-      institucion: 'Curso metodología e-learning en CodeAcademy',
-    },
-    {
-      tipo: '',
-      titulo: 'jQuery',
-      fecha: 'ago 2017',
-      institucion: 'Curso metodología e-learning en CodeAcademy',
-    },
-    {
-      tipo: '',
-      titulo: 'React JS',
-      fecha: 'sep 2023',
-      institucion: 'Curso de 30 horas (clases en vivo) en Coderhouse',
-    },
-    {
-      tipo: '',
-      titulo: 'IA para programadores',
-      fecha: 'dic 2023',
-      institucion: 'Curso híbrido en Coderhouse: "prompt engineering para programadores"',
-    },
-    {
-      tipo: '',
-      titulo: 'C# Avanzado',
-      fecha: 'ene 2024',
-      institucion: 'Curso metodología e-learning de LinkedIn Learning',
-    },
-  ];
-
-  const HandleBack = () => {
-    if (allowSounds) {
-      playSound(back, 0.5);
-    }
-  }
+  useVisit('estudios');
 
   return (
-    <div>
-    <div className="nes-container is-dark  vh overflow-y-auto overflow-x-hidden ">
-      <div className="nes-container is-dark with-title">
-        <h2 className="title">Estudios</h2>
-        {estudios.map((estudio, index) => (
-          <div key={index}>
-            <h5>{estudio.tipo}</h5>
-            <h5 className='text-decoration-underline'>{estudio.titulo}</h5>
-            <p>{estudio.fecha}</p>
-            <p>{estudio.institucion}</p>
-            <div className="mt-4 mb-4 border-top"></div>
-          </div>
+    <Screen title="Estudios">
+      <h2 className="section-label">Formación</h2>
+      <ul className="achievements">
+        {formacion.map((item, index) => (
+          <Logro key={item.titulo} item={item} icon="trophy" index={index} featured />
         ))}
-      </div>
-      <div className="volver-link">
-        <Link to="/MainMenu" className="nes-btn" onClick={HandleBack}>Volver</Link>
-      </div>  
-    </div>
-    </div>
+      </ul>
+
+      <h2 className="section-label">Cursos</h2>
+      <ul className="achievements">
+        {cursos.map((item, index) => (
+          <Logro key={item.titulo} item={item} icon="star" index={index + formacion.length} />
+        ))}
+      </ul>
+    </Screen>
   );
 };
 
