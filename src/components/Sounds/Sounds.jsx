@@ -50,21 +50,24 @@ const Sounds = ({ children }) => {
 
   // "Bip" de tecla estilo diálogo de RPG, sintetizado con Web Audio (sin
   // archivos): una onda cuadrada muy corta con un tono que varía un poco.
-  const playBlip = useCallback((volume = 0.04) => {
+  const playBlip = useCallback((volume = 0.18) => {
     if (!allowRef.current) return;
     const ctx = Howler.ctx;
-    if (!ctx || ctx.state !== 'running') return;
+    if (!ctx || ctx.state === 'closed') return;
+    // Howler suspende el audio tras 30 s sin efectos; lo reactivamos aquí.
+    if (ctx.state !== 'running') ctx.resume().catch(() => {});
     const t = ctx.currentTime;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = 'square';
-    osc.frequency.setValueAtTime(480 + Math.random() * 160, t);
+    osc.frequency.setValueAtTime(620 + Math.random() * 220, t);
     gain.gain.setValueAtTime(volume, t);
-    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+    gain.gain.setValueAtTime(volume, t + 0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.07);
     osc.connect(gain);
     gain.connect(Howler.masterGain || ctx.destination);
     osc.start(t);
-    osc.stop(t + 0.05);
+    osc.stop(t + 0.075);
   }, []);
 
   const playBackgroundMusic = useCallback((volume = 0.2) => {

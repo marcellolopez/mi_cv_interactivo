@@ -10,6 +10,7 @@ Desarrollador Full Stack y Especialista en RPA · Santiago, Chile.
 ![NES.css](https://img.shields.io/badge/NES.css-2.3-212529)
 ![Howler.js](https://img.shields.io/badge/Howler.js-audio-f7d51d)
 ![Vercel](https://img.shields.io/badge/deploy-Vercel-000?logo=vercel)
+![Licencia MIT](https://img.shields.io/badge/licencia-MIT-92cc41)
 
 ![Pantalla de título](docs/capturas/inicio.png)
 
@@ -117,6 +118,12 @@ No hace falta tocar componentes: basta con editar [`src/data/cv.js`](src/data/cv
 
 El sitio se publica automáticamente en **Vercel** con cada push a `master`. La versión de Node se fija en
 `package.json` (`"engines": { "node": "26.x" }`) y `vercel.json` hace que cualquier ruta cargue la aplicación.
+
+## Licencia
+
+El código se publica bajo la [licencia MIT](LICENSE): puedes usarlo como base para tu propio CV interactivo.
+El contenido del CV (textos y datos personales) es de Marcello López Cáceres, y los efectos de sonido y la
+música pertenecen a sus respectivos autores, así que reemplázalos si reutilizas el proyecto.
 
 ## Contacto
 

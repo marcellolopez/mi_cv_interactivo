@@ -8,7 +8,7 @@ import { competencias, experiencias, perfil, proyectos } from '../../data/cv';
 const fullText = `"${perfil.bio.join('\n\n')}"`;
 
 // Suena un "bip" cada BLIP_EVERY letras (no en espacios), como en los diálogos de RPG.
-const BLIP_EVERY = 3;
+const BLIP_EVERY = 4;
 
 const stats = [
   { value: perfil.aniosExperiencia, label: 'Años de experiencia' },
