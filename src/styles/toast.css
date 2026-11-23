@@ -1,0 +1,50 @@
+/* Notificación de logro y scrollbar */
+
+/* ---------- Notificación de logro ---------- */
+.toast-region {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: min(420px, calc(100% - 2 * var(--gutter)));
+  z-index: 40;
+}
+
+.toast.nes-container.is-dark {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+  animation: toast-in 0.4s steps(4) both;
+}
+
+.toast-title {
+  color: var(--warning);
+  font-size: 0.7rem;
+  margin-bottom: 0.4rem;
+}
+
+.toast-text {
+  font-size: 0.55rem;
+  margin: 0;
+}
+
+.toast-link.nes-btn {
+  margin-top: 0.75rem;
+  font-size: 0.55rem;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border: 2px solid #fff;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #333;
+}

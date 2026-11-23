@@ -87,3 +87,59 @@ export const useArrowNav = (onMove) => {
 
   return { ref, onKeyDown };
 };
+
+// Scroll "a saltos", como si la pantalla corriera a pocos fotogramas por segundo
+// (igual que las transiciones con steps()). Solo intercepta la rueda del mouse
+// o el touchpad; el scroll táctil, el teclado y la barra siguen siendo nativos.
+export const useSteppedScroll = (ref, fps = 12) => {
+  const reduced = usePrefersReducedMotion();
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reduced) return undefined;
+
+    let target = null;
+    let timer = null;
+
+    const stop = () => {
+      clearInterval(timer);
+      timer = null;
+      target = null;
+    };
+
+    const tick = () => {
+      const max = el.scrollHeight - el.clientHeight;
+      target = Math.max(0, Math.min(max, target));
+      const diff = target - el.scrollTop;
+      if (Math.abs(diff) < 1) {
+        stop();
+        return;
+      }
+      // Cada fotograma avanza casi la mitad de lo que falta, en saltos visibles.
+      const step = Math.sign(diff) * Math.max(8, Math.ceil(Math.abs(diff) * 0.45));
+      el.scrollTop += Math.abs(step) > Math.abs(diff) ? diff : step;
+    };
+
+    const onWheel = (event) => {
+      if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      const max = el.scrollHeight - el.clientHeight;
+      if (max <= 0) return;
+      const unit = event.deltaMode === 1 ? 40 : event.deltaMode === 2 ? el.clientHeight : 1;
+      const base = target ?? el.scrollTop;
+      const next = Math.max(0, Math.min(max, base + event.deltaY * unit));
+      if (next === base) return;
+      event.preventDefault();
+      target = next;
+      if (!timer) {
+        tick();
+        timer = setInterval(tick, 1000 / fps);
+      }
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', onWheel);
+      clearInterval(timer);
+    };
+  }, [ref, fps, reduced]);
+};

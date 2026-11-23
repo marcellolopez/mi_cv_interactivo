@@ -1,4 +1,3 @@
-import React from 'react';
 import Screen from '../Screen/Screen';
 import { useVisit } from '../Progress/Progress';
 import { cursos, formacion, idiomas } from '../../data/cv';

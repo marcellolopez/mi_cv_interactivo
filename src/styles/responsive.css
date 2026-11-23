@@ -1,0 +1,71 @@
+/* Móvil y reducir movimiento (siempre al final) */
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .screen.nes-container.is-dark {
+    padding: 1rem 0.9rem;
+  }
+
+  .hud {
+    font-size: 0.5rem;
+  }
+
+  .menu {
+    padding-left: 1.5rem;
+  }
+
+  .menu-item::before {
+    left: -1.5rem;
+  }
+
+  .menu-item.nes-btn {
+    font-size: 0.75rem;
+  }
+
+  .dialog .nes-balloon {
+    font-size: 0.6rem;
+  }
+
+  .stat-value {
+    font-size: 1.2rem;
+  }
+
+  .key-hint {
+    display: none;
+  }
+
+  .menu {
+    padding: 0 1.5rem;
+  }
+
+  .menu-item.nes-btn {
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+  }
+
+  /* En móvil la notificación va arriba para no tapar el botón Volver */
+  .toast-region {
+    top: 24px;
+    bottom: auto;
+  }
+
+  body {
+    background-attachment: scroll;
+  }
+}
+
+/* ---------- Reducir movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition: none !important;
+  }
+
+  .bg-clouds {
+    animation: none;
+  }
+}

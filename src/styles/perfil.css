@@ -1,0 +1,95 @@
+/* Perfil: diálogo y estadísticas */
+
+/* ---------- Perfil / diálogos ---------- */
+.perfil,
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dialog .nes-balloon {
+  margin: 0 0 1.5rem;
+  width: 100%;
+  font-size: 0.7rem;
+  line-height: 1.9;
+  animation: pop-in 0.4s var(--step) both;
+}
+
+.dialog-text {
+  white-space: pre-line;
+  min-height: 9em;
+  cursor: pointer;
+}
+
+.dialog-sign {
+  text-align: right;
+  color: var(--warning);
+  margin: 0;
+}
+
+.dialog-skip {
+  display: block;
+  margin-left: auto;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.55rem;
+  cursor: pointer;
+  animation: blink 1s steps(1) infinite;
+}
+
+.dialog-sprite {
+  margin-left: 0.5rem;
+  animation: hop 1.2s steps(4) infinite;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+.stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.25rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+  background: var(--panel-2);
+  box-shadow: 0 4px #fff, 0 -4px #fff, 4px 0 #fff, -4px 0 #fff;
+  margin: 4px;
+  animation: pop-in 0.4s steps(4) both;
+  animation-delay: calc(0.3s + var(--i) * 120ms);
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  color: var(--warning);
+  text-shadow: 3px 3px 0 #000;
+}
+
+.stat-label {
+  font-size: 0.55rem;
+  color: var(--muted);
+}

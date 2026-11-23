@@ -4,7 +4,6 @@
 //
 // Rendimiento: cada parte animada es una capa propia y solo se anima con
 // opacity/transform, así el navegador no redibuja el SVG en cada frame.
-import React from 'react';
 
 const W = 320;
 const H = 180;

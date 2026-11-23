@@ -1,6 +1,6 @@
 // Gamificación: cada sección visitada suma una moneda. Al completar todas,
 // se invita a la persona a pasar por Contacto.
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSound } from '../Sounds/Sounds';
 

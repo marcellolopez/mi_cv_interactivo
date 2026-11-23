@@ -1,12 +1,11 @@
 // src/App.jsx
-import React from 'react';
 import 'nes.css/css/nes.min.css';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Sounds from './components/Sounds/Sounds';
 import Background from './components/Background/Background';
 import { ProgressProvider } from './components/Progress/Progress';
 import Inicio from './components/Inicio/Inicio';
-import MainMenu from './components/main_menu/MainMenu';
+import MainMenu from './components/MainMenu/MainMenu';
 import Perfil from './components/Perfil/Perfil';
 import Competencias from './components/Competencias/Competencias';
 import Experiencia from './components/Experiencia/Experiencia';

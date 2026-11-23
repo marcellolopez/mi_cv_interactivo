@@ -1,0 +1,100 @@
+/* Habilidades: inventario con barras de carga */
+
+/* ---------- Habilidades (inventario) ---------- */
+.inventory {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 4px;
+}
+
+.inventory-slot.nes-container.is-dark {
+  margin: 0;
+  animation: pop-in 0.4s steps(4) both;
+  animation-delay: calc(var(--i) * 140ms);
+}
+
+.inventory-slot .title {
+  font-size: 0.65rem;
+}
+
+.inventory-slot.is-primary .title,
+.inventory-slot.is-primary .tag {
+  color: var(--primary);
+}
+
+.inventory-slot.is-success .title,
+.inventory-slot.is-success .tag {
+  color: var(--success);
+}
+
+.inventory-slot.is-warning .title,
+.inventory-slot.is-warning .tag {
+  color: var(--warning);
+}
+
+.inventory-slot.is-error .title,
+.inventory-slot.is-error .tag {
+  color: var(--error);
+}
+
+.load-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.55rem;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.load-count {
+  color: var(--warning);
+}
+
+.inventory-slot .load-bar {
+  height: 22px;
+  margin: 0 0 1rem;
+}
+
+/* Las herramientas aparecen a medida que la barra avanza */
+.inventory-slot .tag {
+  transition: transform 0.15s steps(2);
+}
+
+.inventory-slot .tag.is-pending {
+  visibility: hidden;
+}
+
+.inventory-slot .tag.is-shown {
+  animation: pop-in 0.25s steps(3) both;
+}
+
+.inventory-slot .tag:hover {
+  transform: translateY(-3px);
+}
+
+.strengths {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  font-size: 0.6rem;
+}
+
+.strengths li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  visibility: hidden;
+}
+
+.is-strengths.is-ready .strengths li {
+  visibility: visible;
+  animation: pop-in 0.3s steps(3) both;
+  animation-delay: calc(var(--j) * 150ms);
+}
+
+.is-strengths .title {
+  color: var(--error);
+}

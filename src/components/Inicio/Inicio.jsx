@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSound } from '../Sounds/Sounds';
 import { useArrowNav } from '../../hooks/animation';

@@ -1,0 +1,85 @@
+/* Proyectos */
+
+/* ---------- Proyectos ---------- */
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.project-filters .nes-btn {
+  font-size: 0.6rem;
+  white-space: normal;
+}
+
+.project {
+  min-width: 0;
+}
+
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: 1.75rem 1.25rem;
+}
+
+.project {
+  display: flex;
+  animation: pop-in 0.4s steps(4) both;
+  animation-delay: calc(min(var(--i), 8) * 70ms);
+}
+
+.project .nes-container.is-dark {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s steps(2);
+}
+
+.project .nes-container.is-dark:hover {
+  transform: translateY(-4px);
+}
+
+.project .title {
+  font-size: 0.55rem;
+  color: var(--primary);
+}
+
+.project.is-ia .title {
+  color: var(--success);
+}
+
+.project-name {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--warning);
+  margin: 0 0 0.5rem;
+}
+
+.project-client {
+  font-size: 0.55rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.project-desc {
+  font-size: 0.55rem;
+  line-height: 1.8;
+  flex: 1;
+}
+
+.project-link.nes-btn {
+  margin-top: 1.25rem;
+  font-size: 0.55rem;
+  align-self: flex-start;
+}
+
+.achievement-level {
+  font-size: 0.5rem;
+  color: var(--success);
+  margin: 0;
+}

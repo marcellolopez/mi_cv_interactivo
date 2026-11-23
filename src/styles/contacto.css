@@ -1,0 +1,23 @@
+/* Contacto */
+
+/* ---------- Contacto ---------- */
+.contact-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.contact-btn.nes-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.7rem;
+}
+
+.copy-status {
+  min-height: 1.5em;
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--success);
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSound } from '../Sounds/Sounds';
 import Screen from '../Screen/Screen';
 import { useVisit } from '../Progress/Progress';

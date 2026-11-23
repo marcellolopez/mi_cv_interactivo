@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Screen from '../Screen/Screen';
 import { useSound } from '../Sounds/Sounds';
 import { useVisit } from '../Progress/Progress';

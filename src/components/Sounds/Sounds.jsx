@@ -1,15 +1,14 @@
-// src/components/Sounds/Sounds.jsx
-import React, { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
+import { createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
 import { Howl, Howler } from 'howler';
 
-import back from '/src/assets/fx/back.mp3';
-import bgMusic from '/src/assets/fx/bg-music.mp3';
-import enter from '/src/assets/fx/enter.mp3';
-import hit from '/src/assets/fx/hit-8bit.mp3';
-import pickUpCoin from '/src/assets/fx/pickUpCoin.wav';
-import pluck from '/src/assets/fx/pluck.mp3';
-import pong from '/src/assets/fx/pong.mp3';
-import progress from '/src/assets/fx/progress.mp3';
+import back from '../../assets/fx/back.mp3';
+import bgMusic from '../../assets/fx/bg-music.mp3';
+import enter from '../../assets/fx/enter.mp3';
+import hit from '../../assets/fx/hit-8bit.mp3';
+import pickUpCoin from '../../assets/fx/pickUpCoin.wav';
+import pluck from '../../assets/fx/pluck.mp3';
+import pong from '../../assets/fx/pong.mp3';
+import progress from '../../assets/fx/progress.mp3';
 
 // Efectos cortos: se descargan y decodifican UNA sola vez al cargar la app
 // (Web Audio API). Al hacer clic solo se reproduce el buffer que ya está en

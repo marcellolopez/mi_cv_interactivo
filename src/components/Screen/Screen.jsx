@@ -1,8 +1,9 @@
 // Marco común de cada pantalla: HUD, título, contenido con scroll y botón Volver.
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSound } from '../Sounds/Sounds';
 import { useProgress } from '../Progress/Progress';
+import { useSteppedScroll } from '../../hooks/animation';
 import { perfil } from '../../data/cv';
 
 const Hud = () => {
@@ -43,6 +44,8 @@ const Screen = ({ title, children, back = true, focusTitle = true, className = '
   const { playSound } = useSound();
   const navigate = useNavigate();
   const titleRef = useRef(null);
+  const bodyRef = useRef(null);
+  useSteppedScroll(bodyRef);
 
   // Al cambiar de pantalla, el foco va al título (lectores de pantalla y teclado).
   useEffect(() => {
@@ -70,7 +73,9 @@ const Screen = ({ title, children, back = true, focusTitle = true, className = '
           {title}
         </h1>
       )}
-      <div className="screen-body">{children}</div>
+      <div className="screen-body" ref={bodyRef}>
+        {children}
+      </div>
       {back && (
         <footer className="screen-footer">
           <span className="key-hint" aria-hidden="true">

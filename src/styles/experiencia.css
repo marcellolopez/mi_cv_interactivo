@@ -1,0 +1,310 @@
+/* Experiencia */
+
+/* ---------- Experiencia ---------- */
+.quests {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.quest {
+  margin-bottom: 2rem;
+  animation: pop-in 0.45s steps(5) both;
+  animation-delay: calc(min(var(--i), 5) * 120ms);
+}
+
+.quest .nes-container.is-dark {
+  margin: 0;
+  transition: transform 0.2s steps(2);
+}
+
+.quest .nes-container.is-dark:hover {
+  transform: translateY(-4px);
+}
+
+.quest .title {
+  color: var(--primary);
+  font-size: 0.65rem;
+}
+
+.quest-role {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--warning);
+}
+
+.quest-company {
+  font-size: 0.65rem;
+  margin-bottom: 0.25rem;
+}
+
+.quest-date {
+  font-size: 0.55rem;
+  color: var(--muted);
+}
+
+.quest-live {
+  display: inline-block;
+  margin-left: 0.75rem;
+  padding: 2px 6px;
+  font-size: 0.5rem;
+  color: #000;
+  background: var(--success);
+  animation: blink 1.4s steps(1) infinite;
+}
+
+.quest-list {
+  font-size: 0.6rem;
+  line-height: 1.8;
+  margin: 1rem 0;
+}
+
+.quest-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Experiencia: mapa de niveles ---------- */
+.experience-intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.experience-intro .screen-intro {
+  margin: 0;
+  text-align: left;
+}
+
+.experience-intro .nes-btn {
+  font-size: 0.55rem;
+}
+
+.worldmap.nes-container.is-dark {
+  margin: 0 4px 1.75rem;
+  padding: 0.75rem 1rem 1rem;
+  background: #16163a;
+}
+
+.worldmap-track {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 46px 0 6px;
+  scrollbar-width: thin;
+}
+
+.worldmap-path {
+  list-style: none;
+  display: flex;
+  gap: 26px;
+  width: max-content;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.worldmap-stop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 44px;
+  animation: pop-in 0.35s steps(4) both;
+  animation-delay: calc(var(--i) * 50ms);
+}
+
+/* Camino punteado entre un nivel y el anterior */
+.worldmap-stop + .worldmap-stop::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  right: 100%;
+  width: 26px;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, var(--muted) 0 4px, transparent 4px 8px);
+}
+
+.worldmap-node {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  font-family: inherit;
+  font-size: 0.65rem;
+  color: #000;
+  cursor: pointer;
+  box-shadow: inset -4px -4px rgba(0, 0, 0, 0.3), 0 4px #fff, 0 -4px #fff, 4px 0 #fff, -4px 0 #fff;
+  transition: transform 0.2s steps(2);
+}
+
+.worldmap-node.is-done {
+  background: var(--warning);
+}
+
+.worldmap-node.is-current {
+  background: var(--success);
+  animation: current-pulse 1.2s steps(1) infinite;
+}
+
+@keyframes current-pulse {
+  50% {
+    background: #c3f07a;
+  }
+}
+
+.worldmap-node:hover,
+.worldmap-node.is-selected {
+  transform: translateY(-4px);
+}
+
+.worldmap-node.is-selected {
+  box-shadow: inset -4px -4px rgba(0, 0, 0, 0.3), 0 4px var(--primary), 0 -4px var(--primary), 4px 0 var(--primary),
+    -4px 0 var(--primary);
+}
+
+.worldmap-node:focus-visible {
+  outline: 3px dashed #fff;
+  outline-offset: 8px;
+}
+
+.worldmap-year {
+  font-size: 0.45rem;
+  color: var(--muted);
+}
+
+/* Personaje que camina hasta el nivel elegido (a saltos, como en un juego) */
+.worldmap-hero {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  transform: translateX(calc(var(--x) - 12px));
+  transition: transform 0.5s steps(6);
+  pointer-events: none;
+}
+
+.pixel-hero {
+  display: block;
+  position: relative;
+  animation: hero-idle 1.2s steps(1) infinite;
+}
+
+.pixel-hero > span {
+  display: block;
+}
+
+.worldmap-hero.is-walking .pixel-hero {
+  animation: hero-walk 0.16s steps(1) infinite;
+}
+
+@keyframes hero-idle {
+  0%,
+  70% {
+    transform: translateY(0);
+  }
+  85% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes hero-walk {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.worldmap-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.worldmap-controls .nes-btn {
+  font-size: 0.6rem;
+}
+
+.worldmap-status {
+  margin: 0;
+  font-size: 0.55rem;
+  color: var(--success);
+}
+
+/* Ficha de la misión */
+.mission-enter {
+  animation: pop-in 0.35s steps(4) both;
+}
+
+.mission-card.nes-container.is-dark {
+  margin: 0 4px;
+}
+
+.mission-card.nes-container.with-title > .title {
+  color: var(--primary);
+  font-size: 0.6rem;
+}
+
+.mission-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mission-stamp {
+  display: inline-block;
+  padding: 6px 8px;
+  font-size: 0.5rem;
+  color: var(--warning);
+  border: 3px solid var(--warning);
+  transform: rotate(-6deg);
+  animation: stamp 0.4s steps(3) both;
+  animation-delay: 0.25s;
+}
+
+@keyframes stamp {
+  0% {
+    opacity: 0;
+    transform: rotate(-6deg) scale(2.2);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-6deg) scale(1);
+  }
+}
+
+.xp {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.xp-label {
+  font-size: 0.6rem;
+  color: var(--success);
+}
+
+.xp-bar.nes-progress {
+  flex: 1;
+  height: 22px;
+  margin: 0;
+}
+
+.xp-value {
+  font-size: 0.5rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.mission-sub {
+  font-size: 0.6rem;
+  color: var(--primary);
+  margin: 1.25rem 0 0.25rem;
+}
